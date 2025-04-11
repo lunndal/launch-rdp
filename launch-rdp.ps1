@@ -27,6 +27,9 @@ param (
     $Template
 )
 
+# Settings
+$mstsc = "C:\WINDOWS\system32\mstsc.exe"
+
 # Make sure we're running PwSh 7 or later.
 if ( -not ($PSVersionTable.PSVersion.Major -ge 7)) {
     $host.UI.RawUI.WindowTitle = "Wrong PowerShell version :("
@@ -68,7 +71,7 @@ foreach ( $key in $configHash.Keys ) {
 }
 
 # Launch RDP client
-Start-Process "mstsc.exe" -ArgumentList $tempFile -Wait
+Start-Process $mstsc -ArgumentList $tempFile -Wait
 
 # Clean up.
 Remove-Item -Path $tempFile -Force
